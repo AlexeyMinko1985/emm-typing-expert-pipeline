@@ -205,7 +205,7 @@ def запустить_пайплайн(input_path):
         fig.text(0.76, 0.4, stats_text, fontsize=10, family='monospace', va='top',
                  bbox=dict(facecolor='white', alpha=0.8, edgecolor='#dee2e6', boxstyle='round'))
 
-        save_path = project_root / "results" / f"Отчет_{today}.png"
+        save_path = project_root / "results" / f"Consensus_Quality_Report_{today}.png"
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         print(f"--- ГОТОВО. ОТЧЕТ: {save_path} ---")
         plt.show()
@@ -218,3 +218,4 @@ if __name__ == "__main__":
     input_p = project_root / "data" / "raw_input"
     if not input_p.exists(): input_p.mkdir(parents=True)
     запустить_пайплайн(input_p)
+
