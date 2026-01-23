@@ -158,9 +158,9 @@ def запустить_упорядоченный_пайплайн():
 
         plt.subplots_adjust(left=0.1, right=0.75, bottom=0.1, top=0.85)
 
-        save_png = out_dir / f"Beall_Report_{today}.png"
+        save_png = out_dir / f"Expert_emm_Typing_Report_{today}.png"
         plt.savefig(save_png, dpi=300, bbox_inches='tight')
-        df.to_csv(out_dir / f"Consolidated_Report_{today}.csv", index=False, encoding='utf-8-sig')
+        df.to_csv(out_dir / f"Final_emm_Typing_Results_{today}.csv", index=False, encoding='utf-8-sig')
 
         print(f"\n📊 АНАЛИЗ ЗАВЕРШЕН. Результаты в: {out_dir}")
     else:
@@ -169,3 +169,4 @@ def запустить_упорядоченный_пайплайн():
 
 if __name__ == "__main__":
     запустить_упорядоченный_пайплайн()
+
