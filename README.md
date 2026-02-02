@@ -110,16 +110,21 @@ The pipeline is designed for "Zero-Config" operation. All necessary working dire
 *   **results/emm-types/** — (Auto-created) Directory for final expert reports (PNG and CSV).
 *   **requirements.txt** — List of dependencies for environment deployment.
 
-
 ## Installation and Usage
-1.Preparation: Download the ZIP archive and select "Extract to [Folder Name]". This ensures the correct project structure is maintained.
-2.Navigate to Folder: Open a terminal and go to the project folder using the command: cd path_to_folder
-3.Install Dependencies: Install libraries with a single command: pip install -r requirements.txt
-4.Run Stage 1 (Assembly): Execute the following command in the terminal: python assemble_consensus.py
-(Note: The data/raw_input/ folder already contains test samples for verification).
-5.Evaluate Assembly: Go to the results/ folder. Review the graphical report and verified sequences in results/consensuses_fastas/.
-6.Run Stage 2 (Typing): To interpret results and determine the emm-type, execute the command: python emm_typer.py
-7.Final Evaluation: Go to the results/emm-types/ directory. Review the final expert report (Heatmap) and the summary table (CSV). Check type matches and QC Verdict status.
+
+1. **Preparation:** Download the ZIP archive and select **"Extract to [Folder Name]"**. This ensures the correct project structure is maintained.
+2. **Navigate to Folder:** Open a terminal and go to the project folder using the command:  
+   `cd path_to_folder`
+3. **Install Dependencies:** Install libraries with a single command:  
+   `pip install -r requirements.txt`
+4. **Run Stage 1 (Assembly):** Execute the following command in the terminal:  
+   `python assemble_consensus.py`  
+   *(Note: The data/raw_input/ folder already contains test samples for verification).*
+5. **Evaluate Assembly:** Go to the `results/` folder. Review the graphical report and verified sequences in `results/consensuses_fastas/`.
+6. **Run Stage 2 (Typing):** To interpret results and determine the emm-type, execute the command:  
+   `python emm_typer.py`
+7. **Final Evaluation:** Go to the `results/emm-types/` directory. Review the final expert report (Heatmap) and the summary table (CSV). Check type matches and QC Verdict status.
+
 
 ---
 **Developer:** Alexey Minko (Microbiologist & Bioinformatics Developer).
