@@ -24,7 +24,7 @@
 ### 2. Модуль экспертного типирования (emm-typing)
 *   Локальное выравнивание по алгоритму Смита-Ватермана (полная совместимость с Blast 2.0 Server).
 *   Двойная верификация по референсным базам CDC (trimmed и untrimmed).
-*   Валидация результатов по критериям Biotechnology Core Facility (CDC): идентичность не менее 92%, длина перекрытия не менее 150 п.н.
+*   Валидация результатов по критериям Biotechnology Core Facility (CDC): идентичность не менее 92%, длина перекрытия не менее 180 п.н.
 *   Автоматическое разделение результатов на Тип и Подтип.
 
 ## Модуль визуализации данных (Seaborn Data Visualization)
@@ -41,18 +41,26 @@
 ![Typing Report](Expert_emm_Typing_Report.png)
 
 ## Структура проекта (Автоматическая настройка)
-Пайплайн спроектирован для работы с минимальной предварительной настройкой. Все необходимые рабочие директории создаются скриптами автоматически при первом запуске.
 
-*   **data/db_cdc/** — Директория для референсных баз данных CDC. Заполняется пользователем.
-*   **data/raw_input/** — (Автоматическое создание) Директория для размещения входящих файлов хроматограмм (.ab1).
-*   **results/consensuses_fastas/** — (Автоматическое создание) Директория для сохранения верифицированных консенсусов.
-*   **results/emm-types/** — (Автоматическое создание) Директория для итоговых экспертных отчетов (PNG и CSV).
-*   **requirements.txt** — Список необходимых библиотек для развертывания программной среды.
+*   **assemble_consensus.py** — Модуль реконструкции и сборки консенсусов.
+*   **emm_typer.py** — Модуль экспертного типирования.
+*   **data/db_cdc/** — Директория для референсных баз данных CDC.
+*   **data/raw_input/** — Директория для любых типов входящих данных секвенирования (.ab1, .fasta, .seq, .txt).
+*   **results/consensuses_fastas/** — (Автоматическое создание) Верифицированные консенсусы.
+*   **results/emm-types/** — (Автоматическое создание) Итоговые отчеты (PNG и CSV).
+*   **requirements.txt** — Список необходимых библиотек.
+
 
 ## Инструкция по эксплуатации
-1. Установка необходимых библиотек: `pip install -r requirements.txt`.
-2. Размещение исходных файлов .ab1 в автоматически созданной директории `data/raw_input/`.
-3. Последовательный запуск модулей сборки и типирования.
+
+1. **Подготовка:** Скачайте ZIP-архив и выберите **«Извлечь в одноименную папку»** (Extract to...). Это гарантирует сохранение правильной структуры проекта.
+2. **Переход в папку:** Откройте терминал и перейдите в папку проекта командой: `cd путь_к_папке`
+3. **Установка зависимостей:** Установите библиотеки одной командой: `pip install -r requirements.txt`
+4. **Запуск Этапа 1 (Сборка):** Выполните в терминале команду: `python assemble_consensus.py`
+   *(Примечание: Папка data/raw_input/ уже содержит тестовые примеры для проверки).*
+5. **Оценка сборки:** Перейдите в папку `results/`. Оцените графический отчет и верифицированные последовательности в `results/consensuses_fastas/`.
+6. **Запуск Этапа 2 (Типирование):** Для интерпретации результатов и определения emm-типа выполните команду: `python emm_typer.py`
+7. **Финальная оценка:** Перейдите в директорию `results/emm-types/`. Оцените итоговый экспертный отчет (Heatmap) и сводную таблицу (CSV). Проверьте соответствие типов и статус прохождения контроля качества (QC Verdict).
 
 ---
 Разработчик: Алексей Минко (Microbiologist & Bioinformatics Developer).
@@ -89,7 +97,7 @@ The package automates two key stages of bioinformatic analysis:
 ### 2. Expert emm-Typing Module
 *   Local alignment using the Smith-Waterman algorithm (full compatibility with Blast 2.0 Server).
 *   Double verification using CDC reference databases (trimmed and untrimmed).
-*   Result validation according to Biotechnology Core Facility (CDC) criteria: identity ≥ 92%, overlap length ≥ 150 bp.
+*   Result validation according to Biotechnology Core Facility (CDC) criteria: identity ≥ 92%, overlap length ≥ 180 bp.
 *   Automatic separation of results into Type and Subtype.
 
 ## Data Visualization Module (Seaborn)
@@ -101,16 +109,24 @@ The system integrates a visualization module based on the Seaborn library for ex
 ## Project Structure (Automated Setup)
 The pipeline is designed for "Zero-Config" operation. All necessary working directories are created automatically by scripts upon the first run.
 
+*   **assemble_consensus.py** — Reconstruction, assembly, and verification module (Stage 1).
+*   **emm_typer.py** — Expert emm-typing and reporting module (Stage 2).
 *   **data/db_cdc/** — Directory for CDC reference databases. (User-provided).
-*   **data/raw_input/** — (Auto-created) Directory for incoming chromatogram files (.ab1).
+*   **data/raw_input/** — Directory for all types of incoming sequencing data (.ab1, .fasta, .seq, .txt).
 *   **results/consensuses_fastas/** — (Auto-created) Directory for verified consensus storage.
 *   **results/emm-types/** — (Auto-created) Directory for final expert reports (PNG and CSV).
 *   **requirements.txt** — List of dependencies for environment deployment.
 
+
 ## Installation and Usage
-1. Install dependencies: `pip install -r requirements.txt`.
-2. Place raw .ab1 files into the automatically created `data/raw_input/` directory.
-3. Run assembly and typing modules sequentially.
+1.Preparation: Download the ZIP archive and select "Extract to [Folder Name]". This ensures the correct project structure is maintained.
+2.Navigate to Folder: Open a terminal and go to the project folder using the command: cd path_to_folder
+3.Install Dependencies: Install libraries with a single command: pip install -r requirements.txt
+4.Run Stage 1 (Assembly): Execute the following command in the terminal: python assemble_consensus.py
+(Note: The data/raw_input/ folder already contains test samples for verification).
+5.Evaluate Assembly: Go to the results/ folder. Review the graphical report and verified sequences in results/consensuses_fastas/.
+6.Run Stage 2 (Typing): To interpret results and determine the emm-type, execute the command: python emm_typer.py
+7.Final Evaluation: Go to the results/emm-types/ directory. Review the final expert report (Heatmap) and the summary table (CSV). Check type matches and QC Verdict status.
 
 ---
 **Developer:** Alexey Minko (Microbiologist & Bioinformatics Developer).
